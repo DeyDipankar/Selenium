@@ -1,12 +1,17 @@
 import os
 os.chdir('..')
 import time
+import chromedriver_autoinstaller
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+
+chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+                                      # and if it doesn't exist, download it automatically,
+                                      # then add chromedriver to path
 
 options = ChromeOptions()
 options.add_experimental_option('excludeSwitches',['enable-logging'])
@@ -22,6 +27,9 @@ search_space = driver.find_element(by=By.XPATH, value='/html/body/div[1]/div[3]/
 search_space.send_keys(search_text)
 search_space = driver.find_element(by=By.XPATH, value='/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input')
 search_space.send_keys(Keys.ENTER)
+wallpaper_element = driver.find_element(by=By.XPATH, value='//*[@id="i7"]/div[1]/span/span/div[1]/a/span')
+wallpaper_element.click()
+
 # image_element = driver.find_element(by=By.XPATH, value='//*[@id="islrg"]/div[1]/div[2]/a[1]/div[1]/img')
 
 # action = ActionChains(driver)
@@ -37,7 +45,3 @@ search_space.send_keys(Keys.ENTER)
 time.sleep(3)
 driver.close()
 driver.quit()
-
-
-# driver.close()
-# driver.quit()
